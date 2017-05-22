@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import random
-import config
 import telebot
 from telebot import types
+import random
 import time
+import config
 import re
 import requests
-
-bot = telebot.TeleBot(token=config.token)
 
 class Preprocessor(object):
 
@@ -36,13 +34,30 @@ url_dict = {
     'prebase': config.prebase,
     'base': config.base}
 
-
+bot = telebot.TeleBot(token=config.token)
 @bot.message_handler(commands=['meme', 'Meme'])
 def provide_meme(message):
     bot.send_photo(chat_id=message.chat.id,
                    photo=''.join(Preprocessor.prepare_url()[i] for i in range(2)),
                    caption=Preprocessor.get_title())
     time.sleep(1)
+
+@bot.message_handler(commands=['Kappa', 'kappa'])
+def provide_kappa(message):
+    bot.send_sticker(chat_id=message.chat.id,
+                     data='CAADAgADiAADqY0YSffyaTQRASc3Ag')
+
+@bot.message_handler(commands=['Kappa128', 'kappa128'])
+def provide_kappa128(message):
+    bot.send_sticker(chat_id=message.chat.id,
+                     data='CAADAgADhwADqY0YSfvhSoAVRdGjAg')
+
+@bot.message_handler(commands=['Kappa256', 'kappa256'])
+def provide_kappa256(message):
+    bot.send_sticker(chat_id=message.chat.id,
+                     data='CAADAgADhgADqY0YSWMq0_yxYGUtAg')
+
+#TODO: implement inline_handler
 
 if __name__ == '__main__':
     random.seed()
