@@ -9,7 +9,6 @@ import re
 import requests
 
 class Preprocessor(object):
-
     @staticmethod
     def randomize_postbase(soft=True):
             if soft == True:
@@ -45,19 +44,44 @@ def provide_meme(message):
 @bot.message_handler(commands=['Kappa', 'kappa'])
 def provide_kappa(message):
     bot.send_sticker(chat_id=message.chat.id,
-                     data='CAADAgADiAADqY0YSffyaTQRASc3Ag')
+                     data='CAADAgADnAADAm8gSUlfehpJdSSnAg')
 
 @bot.message_handler(commands=['Kappa128', 'kappa128'])
 def provide_kappa128(message):
     bot.send_sticker(chat_id=message.chat.id,
-                     data='CAADAgADhwADqY0YSfvhSoAVRdGjAg')
+                     data='CAADAgADmwADAm8gSeu5xOY0kZaQAg')
 
 @bot.message_handler(commands=['Kappa256', 'kappa256'])
 def provide_kappa256(message):
     bot.send_sticker(chat_id=message.chat.id,
-                     data='CAADAgADhgADqY0YSWMq0_yxYGUtAg')
+                     data='CAADAgADmgADAm8gSVEl3iquPsLtAg')
 
-#TODO: implement inline_handler
+
+@bot.inline_handler(lambda query: len(query.query) is 0)
+def empty_query(query):
+    hint = 'Afloat query to support memes movement! Type Kappa until it is too late!'
+    try:
+        q = types.InlineQueryResultArticle(
+            id='0', title='Meme Master',
+            description=hint,
+            input_message_content=types.InputTextMessageContent(
+                message_text="I'd like you to type Kappa, please. That's what this query is solely about."
+            )
+        )
+        bot.answer_inline_query(query.id, [q], cache_time=3600)
+
+    except Exception as e:
+        print(e)
+
+@bot.inline_handler(lambda query: str(query.query) == 'Kappa')
+def provide_query_kappa(query):
+    try:
+        kappa_128 = types.InlineQueryResultCachedSticker(id='1', sticker_file_id='CAADAgADmwADAm8gSeu5xOY0kZaQAg')
+        kappa_192 = types.InlineQueryResultCachedSticker(id='2', sticker_file_id='CAADAgADnAADAm8gSUlfehpJdSSnAg')
+        kappa_256 = types.InlineQueryResultCachedSticker(id='3', sticker_file_id='CAADAgADmgADAm8gSVEl3iquPsLtAg')
+        bot.answer_inline_query(query.id, [kappa_128, kappa_192, kappa_256], cache_time=3600)
+    except Exception as e:
+        print(e)
 
 if __name__ == '__main__':
     random.seed()
