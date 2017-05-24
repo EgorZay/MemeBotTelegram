@@ -6,6 +6,8 @@
 
 ~~ /kappa or /Kappa to post Kappa Emoticon
 
+~~ Added Inline Handler to post Kappas via '@MemesMasterBot Kappa'
+
 Why post Kappa via @memer_bot? Well, I am too lazy to drag my mouse over to Emote pack, ya know...
 
 This bot is created with the infamous '[pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) library.
