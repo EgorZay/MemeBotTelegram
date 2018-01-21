@@ -18,4 +18,6 @@ To let it work create a folder with config.py and memer_bot.py at the same direc
 
 Folder **bot_v1.1** contains a memer_bot.py version that parses top-60 frontpage imgur images and gifs!
 
+For simplicity, .exe format is placed in /build branch.
+
 Thanks.
